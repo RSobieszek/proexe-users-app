@@ -12,7 +12,24 @@ const Dashboard = () => {
                 </NavLink>
             </div>
             <div className="row">
-                <UsersList />
+                <div className="col s12">
+                    <table className="centered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <UsersList />
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )

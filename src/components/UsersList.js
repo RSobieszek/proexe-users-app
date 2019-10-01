@@ -1,15 +1,23 @@
 import React from 'react'
 import User from './User'
+import {connect} from 'react-redux'
 
-const UsersList = () => {
+const UsersList = (props) => {
+
+    const users = props.users.map((user) => <User key={user.id} user={user} />)
+    // const users = props.users.map((user) => <User key={user.id} user={user} delUser={this.delUser}/>)
+
     return (
-        <div className="container">
-            <h2>UsersList works!</h2>
-            <User />
-            <User />
-            <User />
-        </div>
+        <React.Fragment>
+            {users}
+        </React.Fragment>
     )
 }
 
-export default UsersList
+const mapStateToProps = (state) => {
+    return {
+        users: state.users.users
+    }
+}
+
+export default connect(mapStateToProps)(UsersList)
