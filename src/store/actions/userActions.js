@@ -13,16 +13,26 @@ export const fetchUsersSuccess = users => ({
 
 export const fetchUsersFailure = error => ({
     type: FETCH_USERS_FAILURE,
-    payload: error
+    payload: 'error'
 });
 
 export const fetchUsers = () => {
     return (dispatch) => {
         dispatch(fetchUsersPending())
         return fetch('https://jsonplaceholder.typicode.com/users')
-                .then(response => response.json())
-                .then(json => {
-                    dispatch(fetchUsersSuccess(json))
-                })
+            .then(handleErrors)
+            .then(response => response.json())
+            .then(json => {
+                dispatch(fetchUsersSuccess(json))
+            })
+            .catch(error => dispatch(fetchUsersFailure(error)))
     }
+}
+
+// Handle HTTP errors 
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }

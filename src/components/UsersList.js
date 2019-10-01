@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const UsersList = (props) => {
 
-    const users = props.users.map((user) => <User key={user.id} user={user} />)
+    // const users = props.users.map((user) => <User key={user.id} user={user} />)
     // const users = props.users.map((user) => <User key={user.id} user={user} delUser={this.delUser}/>)
 
     return (
@@ -21,7 +21,9 @@ const UsersList = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {users}
+                {props.users.length 
+                    ? props.users.map((user) => <User key={user.id} user={user} />)
+                    : <tr>No users to display.</tr>}
             </tbody>
         </table>
     )

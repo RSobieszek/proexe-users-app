@@ -2,12 +2,12 @@ import React from 'react'
 import UsersList from './UsersList'
 import { NavLink } from 'react-router-dom'
 import { fetchUsers } from '../store/actions/userActions'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 class Dashboard extends React.Component {
-    componentDidMount(){
-        this.props.fetchUsers()
-    }
+    // componentDidMount() {
+    //     this.props.fetchUsers()
+    // }
     render() {
         return (
             <div className="container">
@@ -19,7 +19,13 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col s12">
-                        {this.props.isFetching ? <p>Loading</p> : <UsersList />}
+                        {
+                            this.props.error 
+                            ? <h4 className='center red-text'>Error loading users!</h4>
+                            : this.props.isFetching 
+                                ? <h4 className='center'>Loading users...</h4>
+                                : <UsersList />
+                        }
                     </div>
                 </div>
             </div>
@@ -29,7 +35,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        error: state.users.error
     }
 
 }
