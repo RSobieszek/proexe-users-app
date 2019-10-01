@@ -1,10 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addUserToServer } from '../store/actions/editUsersActions'
 
 class AddUser extends React.Component {
 
     state = {
         name: '',
         email: ''
+    }
+
+    handleClick = (e) => {
+        e.preventDefault()
+        this.props.history.push('/')
     }
 
     handleChange = (e) => {
@@ -15,16 +22,37 @@ class AddUser extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        console.log('submitted')
+        this.props.addUserToServer(this.state)
+        this.props.history.push('/')
     }
 
     render() {
-        return(
+        return (
             <div className="container">
                 <h2>Add new user</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-field">
-                        <input type="text" id='name' onChange={this.handleChange} />
+                        <input type="text" id='name' onChange={this.handleChange} required />
                         <label htmlFor="name">Name</label>
+                    </div>
+                    <div className="input-field">
+                        <input type="email" id='email' onChange={this.handleChange} required/>
+                        <label htmlFor="email">Email</label>
+                    </div>
+                    <div className="input-field">
+                        <div className="row">
+                            <div className="col">
+                                <button className="btn light-green">Add user</button>
+                            </div>
+                            <div className="col">
+                                <button
+                                    className="btn grey lighten-1"
+                                    onClick={this.handleClick}
+                                >Cancel
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -32,4 +60,10 @@ class AddUser extends React.Component {
     }
 }
 
-export default AddUser
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addUserToServer: (user) => dispatch(addUserToServer(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddUser)

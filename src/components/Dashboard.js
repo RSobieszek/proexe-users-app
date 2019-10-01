@@ -1,21 +1,27 @@
 import React from 'react'
 import UsersList from './UsersList'
 import { NavLink } from 'react-router-dom'
-import { fetchUsers } from '../store/actions/userActions'
+import { fetchUsers } from '../store/actions/fetchUsersActions'
 import { connect } from 'react-redux'
 
 class Dashboard extends React.Component {
-    // componentDidMount() {
-    //     this.props.fetchUsers()
-    // }
+    componentDidMount() {
+        this.props.fetchUsers()
+    }
     render() {
         return (
             <div className="container">
                 <div className="row">
-                    <h1>Dashboard</h1>
-                    <NavLink to='/add' className="waves-effect waves-light btn">
-                        Add user
-                    </NavLink>
+                    <div className="col s12">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <NavLink to='/add' className="waves-effect waves-light btn right">
+                            Add user
+                        </NavLink>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col s12">

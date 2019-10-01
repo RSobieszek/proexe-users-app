@@ -2,7 +2,7 @@ import React from 'react'
 
 const User = ({ user }) => {
 
-    const { id, name, username, email, address: { city } } = user
+    const { id, name, username, email, address: { city } = {}} = user || {}
 
     return (
         <tr>

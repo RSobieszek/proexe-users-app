@@ -1,3 +1,5 @@
+import handleErrors from '../errors/handleHTTPErrors'
+
 export const FETCH_USERS_PENDING = 'FETCH_USERS_PENDING';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
@@ -29,10 +31,3 @@ export const fetchUsers = () => {
     }
 }
 
-// Handle HTTP errors 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}

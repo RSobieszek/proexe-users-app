@@ -23,7 +23,7 @@ const UsersList = (props) => {
             <tbody>
                 {props.users.length 
                     ? props.users.map((user) => <User key={user.id} user={user} />)
-                    : <tr>No users to display.</tr>}
+                    : <tr><th>No users to display.</th></tr>}
             </tbody>
         </table>
     )

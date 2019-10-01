@@ -1,36 +1,27 @@
-import { FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from '../actions/userActions'
+import { FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from '../actions/fetchUsersActions'
+import {ADD_USER, ADD_USER_FAILURE} from '../actions/editUsersActions'
+
+// dummy data
+// const initState = {
+//     users: [
+//         {
+//             "name": "Leanne Graham",
+//             "email": "test@test.pl",
+            
+//         },
+//         {
+//             "name": "Ervin Howell",
+//             "email": "Shanna@melissa.tv",
+            
+//         }
+//     ]
+// }
 
 const initState = {
-    users: [
-        {
-            "id": 1,
-            "name": "Leanne Graham",
-            "username": "Bret",
-            
-        },
-        {
-            "id": 2,
-            "name": "Ervin Howell",
-            "email": "Shanna@melissa.tv",
-            "address": {
-                "street": "Victor Plains",
-                "suite": "Suite 879",
-                "city": "Wisokyburgh",
-                "zipcode": "90566-7771",
-                "geo": {
-                    "lat": "-43.9509",
-                    "lng": "-34.4618"
-                }
-            }
-        }
-    ]
+    isFetching: false,
+    errors: null,
+    users: []
 }
-
-// const initState = {
-//     isFetching: false,
-//     errors: null,
-//     users: []
-// }
 
 const usersReducer = (state = initState, action) => {
     switch (action.type) {
@@ -55,6 +46,13 @@ const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+
+        case ADD_USER:
+            console.log('user added!')
+            return {
+                ...state,
+                users: [...state.users, action.payload]
             }
 
         default:
