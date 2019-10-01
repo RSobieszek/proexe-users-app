@@ -1,6 +1,6 @@
 import React from 'react'
 import User from './User'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 const UsersList = (props) => {
 
@@ -8,9 +8,22 @@ const UsersList = (props) => {
     // const users = props.users.map((user) => <User key={user.id} user={user} delUser={this.delUser}/>)
 
     return (
-        <React.Fragment>
-            {users}
-        </React.Fragment>
+        <table className="centered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>City</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {users}
+            </tbody>
+        </table>
     )
 }
 

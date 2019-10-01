@@ -1,7 +1,7 @@
 import React from 'react'
 
 const User = ({user}) => {
-    console.log(user)
+    
     const {id, name, username, email, address: {city}} = user
     
     return (
