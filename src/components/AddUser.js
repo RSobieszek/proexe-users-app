@@ -5,6 +5,8 @@ import { addUserToServer } from '../store/actions/editUsersActions'
 class AddUser extends React.Component {
 
     state = {
+        // i would normally use library to generate unique id's (e.g. uuid), but in this app 
+        // we are showing id's in users list. Below is a workaround for the purpose of this exercise
         id: Math.floor(Math.random() * 100) + 11,
         name: '',
         email: ''
@@ -12,7 +14,6 @@ class AddUser extends React.Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        // console.log(this.props.history)
         this.props.history.push('/')
     }
 
@@ -24,7 +25,6 @@ class AddUser extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted')
         this.props.addUserToServer(this.state)
         this.props.history.push('/')
     }
@@ -42,7 +42,11 @@ class AddUser extends React.Component {
                             onChange={this.handleChange} 
                             required />
                         <label htmlFor="name">Name</label>
-                        <span class="helper-text" data-error="You must enter name" data-success=""></span>
+                        <span 
+                            class="helper-text" 
+                            data-error="You must enter name" 
+                            data-success="">
+                        </span>
                     </div>
                     <div className="input-field">
                         <input 
@@ -52,7 +56,11 @@ class AddUser extends React.Component {
                             onChange={this.handleChange} 
                             required/>
                         <label htmlFor="email">Email</label>
-                        <span class="helper-text" data-error="Wrong email format" data-success=""></span>
+                        <span 
+                            class="helper-text" 
+                            data-error="Wrong email format" 
+                            data-success="">
+                        </span>
                     </div>
                     <div className="input-field">
                         <div className="row">

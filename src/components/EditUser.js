@@ -22,7 +22,6 @@ class EditUser extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted edit')
 
         // Original user data updated with data from form (component state)
         const userData = this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0]
@@ -47,7 +46,11 @@ class EditUser extends React.Component {
                             onChange={this.handleChange} 
                             required />
                         <label htmlFor="name" className="active">Name</label>
-                        <span class="helper-text" data-error="You must enter name" data-success=""></span>
+                        <span 
+                            class="helper-text" 
+                            data-error="You must enter name" 
+                            data-success="">
+                        </span>
                     </div>
                     <div className="input-field">
                         <input 
@@ -58,7 +61,11 @@ class EditUser extends React.Component {
                             value={this.state.email} 
                             required />
                         <label htmlFor="email" className="active">Email</label>
-                        <span class="helper-text" data-error="Wrong email format" data-success=""></span>
+                        <span 
+                            class="helper-text" 
+                            data-error="Wrong email format" 
+                            data-success="">
+                        </span>
                     </div>
                     <div className="input-field">
                         <div className="row">

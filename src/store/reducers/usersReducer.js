@@ -1,22 +1,6 @@
 import { FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from '../actions/fetchUsersActions'
 import {ADD_USER, ADD_USER_FAILURE, EDIT_USER, EDIT_USER_FAILURE, DELETE_USER, DELETE_USER_FAILURE} from '../actions/editUsersActions'
 
-// dummy data
-// const initState = {
-//     users: [
-//         {
-//             "name": "Leanne Graham",
-//             "email": "test@test.pl",
-            
-//         },
-//         {
-//             "name": "Ervin Howell",
-//             "email": "Shanna@melissa.tv",
-            
-//         }
-//     ]
-// }
-
 const initState = {
     isFetching: false,
     errors: null,
@@ -33,7 +17,7 @@ const usersReducer = (state = initState, action) => {
             }
 
         case FETCH_USERS_SUCCESS:
-            console.log('fetch succes')
+            console.log('fetch success')
             return {
                 ...state,
                 isFetching: false,
@@ -75,8 +59,6 @@ const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 users: [...state.users.filter(user => user.id !== action.payload)]
-                // users: [...state.users.filter(user => console.log(user.id, action.payload))]
-                // users: [...state.users.filter(user => user.id === )]
             }
         
         case DELETE_USER_FAILURE:

@@ -23,7 +23,6 @@ export const addUserToServer = (user) => {
             method: 'POST',
             body: JSON.stringify(user)
         })
-        // .then(res => console.log(res))
         .then(handleErrors)
         .then(() => {
             dispatch(addUser(user))
