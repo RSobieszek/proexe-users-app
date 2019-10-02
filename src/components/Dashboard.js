@@ -6,7 +6,11 @@ import { connect } from 'react-redux'
 
 class Dashboard extends React.Component {
     componentDidMount() {
-        this.props.fetchUsers()
+        // simple workaround to stop spamming app with unnecessary api calls
+        // this should be upgraded once connected to api capable of updating database with new users
+        if (this.props.users.length === 0) {
+            this.props.fetchUsers()
+        }
     }
     render() {
         return (
@@ -42,7 +46,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isFetching: state.users.isFetching,
-        error: state.users.error
+        error: state.users.error,
+        users: state.users.users
     }
 
 }

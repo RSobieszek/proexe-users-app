@@ -55,6 +55,10 @@ const usersReducer = (state = initState, action) => {
                 users: [...state.users, action.payload]
             }
 
+        case ADD_USER_FAILURE:
+            console.log('Error adding user: ', action.payload)
+            return state
+
         default:
             return state
     }
