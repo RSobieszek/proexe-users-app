@@ -2,20 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { editUserOnServer } from '../store/actions/editUsersActions'
 
-// const userZ = this.props.user.filter(user => user.id == this.props.match.params.id)[0]
-
 class EditUser extends React.Component {
     
     state = {
         name: this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0].name,
         email: this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0].email
     }
-
-    // handleClickTest = (e) => {
-    //     e.preventDefault()
-    //     // console.log(this.props.user.filter(user => user.id == this.props.match.params.id))
-    //     console.log(this.state.name, this.state.email)
-    // }
 
     handleClick = (e) => {
         e.preventDefault()
@@ -48,21 +40,25 @@ class EditUser extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-field">
                         <input 
+                            className="validate"
                             type="text" 
                             id='name' 
                             value={this.state.name}
                             onChange={this.handleChange} 
                             required />
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name" className="active">Name</label>
+                        <span class="helper-text" data-error="You must enter name" data-success=""></span>
                     </div>
                     <div className="input-field">
                         <input 
+                            className='validate'
                             type="email" 
                             id='email' 
                             onChange={this.handleChange} 
                             value={this.state.email} 
                             required />
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" className="active">Email</label>
+                        <span class="helper-text" data-error="Wrong email format" data-success=""></span>
                     </div>
                     <div className="input-field">
                         <div className="row">

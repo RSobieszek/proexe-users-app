@@ -35,12 +35,24 @@ class AddUser extends React.Component {
                 <h2>Add new user</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-field">
-                        <input type="text" id='name' onChange={this.handleChange} required />
+                        <input 
+                            className='validate'
+                            type="text" 
+                            id='name' 
+                            onChange={this.handleChange} 
+                            required />
                         <label htmlFor="name">Name</label>
+                        <span class="helper-text" data-error="You must enter name" data-success=""></span>
                     </div>
                     <div className="input-field">
-                        <input type="email" id='email' onChange={this.handleChange} required/>
+                        <input 
+                            className='validate'
+                            type="email" 
+                            id='email' 
+                            onChange={this.handleChange} 
+                            required/>
                         <label htmlFor="email">Email</label>
+                        <span class="helper-text" data-error="Wrong email format" data-success=""></span>
                     </div>
                     <div className="input-field">
                         <div className="row">

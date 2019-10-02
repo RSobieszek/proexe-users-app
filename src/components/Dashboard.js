@@ -5,6 +5,7 @@ import { fetchUsers } from '../store/actions/fetchUsersActions'
 import { connect } from 'react-redux'
 
 class Dashboard extends React.Component {
+
     componentDidMount() {
         // simple workaround to stop spamming app with unnecessary api calls
         // this should be upgraded once connected to api capable of updating database with new users
@@ -12,12 +13,14 @@ class Dashboard extends React.Component {
             this.props.fetchUsers()
         }
     }
+
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col s12">
                         <h1>Dashboard</h1>
+                        <p>you can sort users by clicking username</p>
                     </div>
                 </div>
                 <div className="row">

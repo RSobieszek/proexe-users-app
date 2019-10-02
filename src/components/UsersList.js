@@ -12,7 +12,8 @@ class UsersList extends React.Component {
     // const users = props.users.map((user) => <User key={user.id} user={user} delUser={this.delUser}/>)
     state = {
         openModal: false,
-        id: null
+        id: null,
+        sortUsers: 'default'
     }
 
     editUser = (e) => {
@@ -37,6 +38,42 @@ class UsersList extends React.Component {
 
     closeModal = () => {
         this.setState({ openModal: false })
+    }
+
+    sortUsers = () => {
+        
+        switch (this.state.sortUsers) {
+            case 'default':
+                this.setState({sortUsers: 'A-Z'})
+                break;
+
+            case 'A-Z':
+                this.setState({sortUsers: 'Z-A'})
+                break;
+
+            case 'Z-A':
+                this.setState({sortUsers: 'A-Z'})
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    renderUsers = () => {
+        switch (this.state.sortUsers) {
+            case 'default':
+                return this.props.users.map((user) => <User key={user.id} user={user} editUser={this.editUser} deleteUser={this.deleteUser} />)
+                
+            case 'A-Z':
+                return this.props.users.sort((a,b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0)).map((user) => <User key={user.id} user={user} editUser={this.editUser} deleteUser={this.deleteUser} />)
+
+            case 'Z-A':
+                return this.props.users.sort((a,b) => (a.username < b.username) ? 1 : ((b.username < a.username) ? -1 : 0)).map((user) => <User key={user.id} user={user} editUser={this.editUser} deleteUser={this.deleteUser} />)
+
+            default:
+                break;
+        }
     }
 
     render() {
@@ -67,16 +104,22 @@ class UsersList extends React.Component {
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Username</th>
+                            {/* <th><button className='btn-flat' onClick={this.sortUsers}>Username</button></th> */}
+                            <th onClick={this.sortUsers} style={{cursor: 'pointer'}}>Username</th>
                             <th>Email</th>
                             <th>City</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {this.props.users.length
                             ? this.props.users.map((user) => <User key={user.id} user={user} editUser={this.editUser} deleteUser={this.deleteUser} />)
+                            : <tr><th>No users to display.</th></tr>}
+                    </tbody> */}
+                    <tbody>
+                        {this.props.users.length
+                            ? this.renderUsers()
                             : <tr><th>No users to display.</th></tr>}
                     </tbody>
                 </table>
