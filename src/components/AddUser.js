@@ -5,7 +5,7 @@ import { addUserToServer } from '../store/actions/editUsersActions'
 class AddUser extends React.Component {
 
     state = {
-        id: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 100) + 11,
         name: '',
         email: ''
     }
@@ -24,7 +24,6 @@ class AddUser extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state.id)
         console.log('submitted')
         this.props.addUserToServer(this.state)
         this.props.history.push('/')

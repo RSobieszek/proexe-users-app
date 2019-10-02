@@ -1,17 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addUserToServer } from '../store/actions/editUsersActions'
+import { addUserToServer, editUserOnServer } from '../store/actions/editUsersActions'
+
+// const userZ = this.props.user.filter(user => user.id == this.props.match.params.id)[0]
 
 class EditUser extends React.Component {
-
+    
     state = {
-        name: '',
-        email: ''
+        name: this.props.user.filter(user => user.id == this.props.match.params.id)[0].name,
+        email: this.props.user.filter(user => user.id == this.props.match.params.id)[0].email,
+        // user: this.props.user.filter(user => user.id == this.props.match.params.id)[0]
+        // userName: userZ
     }
+
+    // handleClickTest = (e) => {
+    //     e.preventDefault()
+    //     // console.log(this.props.user.filter(user => user.id == this.props.match.params.id))
+    //     console.log(this.state.name, this.state.email)
+    // }
 
     handleClick = (e) => {
         e.preventDefault()
-        console.log(this.props.history)
+        // console.log(this.props.history)
+        // console.log(this.props.match.params.id)
+        // console.log(this.state)
         this.props.history.push('/')
     }
 
@@ -23,8 +35,12 @@ class EditUser extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted')
-        this.props.addUserToServer(this.state)
+        console.log('submitted edit')
+        const userData = this.props.user.filter(user => user.id == this.props.match.params.id)[0]
+        userData.name = this.state.name
+        userData.email = this.state.email
+        // console.log(userData)
+        this.props.editUserOnServer(userData)
         this.props.history.push('/')
     }
 
@@ -34,11 +50,21 @@ class EditUser extends React.Component {
                 <h2>Edit user</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-field">
-                        <input type="text" id='name' onChange={this.handleChange} required />
+                        <input 
+                            type="text" 
+                            id='name' 
+                            value={this.state.name}
+                            onChange={this.handleChange} 
+                            required />
                         <label htmlFor="name">Name</label>
                     </div>
                     <div className="input-field">
-                        <input type="email" id='email' onChange={this.handleChange} required />
+                        <input 
+                            type="email" 
+                            id='email' 
+                            onChange={this.handleChange} 
+                            value={this.state.email} 
+                            required />
                         <label htmlFor="email">Email</label>
                     </div>
                     <div className="input-field">
@@ -52,6 +78,11 @@ class EditUser extends React.Component {
                                     onClick={this.handleClick}
                                 >Cancel
                                 </button>
+                                {/* <button
+                                    className="btn grey lighten-1"
+                                    onClick={this.handleClickTest}
+                                >refresh test
+                                </button> */}
                             </div>
                         </div>
                     </div>
@@ -61,10 +92,18 @@ class EditUser extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        addUserToServer: (user) => dispatch(addUserToServer(user))
+        // user: state.users.users.filter(user => user.id === this.props.match.params.id)
+        user: state.users.users
     }
 }
 
-export default connect(null, mapDispatchToProps)(EditUser)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addUserToServer: (user) => dispatch(addUserToServer(user)),
+        editUserOnServer: (user) => dispatch(editUserOnServer(user))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser)

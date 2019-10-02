@@ -1,5 +1,5 @@
 import { FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from '../actions/fetchUsersActions'
-import {ADD_USER, ADD_USER_FAILURE} from '../actions/editUsersActions'
+import {ADD_USER, ADD_USER_FAILURE, EDIT_USER, EDIT_USER_FAILURE} from '../actions/editUsersActions'
 
 // dummy data
 // const initState = {
@@ -58,6 +58,13 @@ const usersReducer = (state = initState, action) => {
         case ADD_USER_FAILURE:
             console.log('Error adding user: ', action.payload)
             return state
+
+        case EDIT_USER:
+            console.log('editing user')
+            return {
+                ...state,
+                users: [...state.users.filter(user => user.id !== action.payload.id ), action.payload]
+            }
 
         default:
             return state
