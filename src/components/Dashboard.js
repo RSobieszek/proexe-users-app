@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col s12">
-                        <NavLink to='/add' className="waves-effect waves-light btn right">
+                        <NavLink to='/add' className="waves-effect waves-light btn-large right">
                             Add user
                         </NavLink>
                     </div>
@@ -30,11 +30,11 @@ class Dashboard extends React.Component {
                 <div className="row">
                     <div className="col s12">
                         {
-                            this.props.error 
-                            ? <h4 className='center red-text'>Error loading users!</h4>
-                            : this.props.isFetching 
-                                ? <h4 className='center'>Loading users...</h4>
-                                : <UsersList />
+                            this.props.error
+                                ? <h4 className='center red-text'>Error loading users!</h4>
+                                : this.props.isFetching
+                                    ? <h4 className='center'>Loading users...</h4>
+                                    : <UsersList />
                         }
                     </div>
                 </div>

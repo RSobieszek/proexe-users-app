@@ -74,8 +74,9 @@ const usersReducer = (state = initState, action) => {
             console.log('deleting user')
             return {
                 ...state,
-                // users: [...state.users.filter(user => user.id !== action.payload.id)]
-                users: [...state.users.filter(user => console.log(user, action.payload.id))]
+                users: [...state.users.filter(user => user.id !== action.payload)]
+                // users: [...state.users.filter(user => console.log(user.id, action.payload))]
+                // users: [...state.users.filter(user => user.id === )]
             }
         
         case DELETE_USER_FAILURE:
