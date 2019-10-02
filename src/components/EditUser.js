@@ -1,16 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addUserToServer, editUserOnServer } from '../store/actions/editUsersActions'
+import { editUserOnServer } from '../store/actions/editUsersActions'
 
 // const userZ = this.props.user.filter(user => user.id == this.props.match.params.id)[0]
 
 class EditUser extends React.Component {
     
     state = {
-        name: this.props.user.filter(user => user.id == this.props.match.params.id)[0].name,
-        email: this.props.user.filter(user => user.id == this.props.match.params.id)[0].email,
-        // user: this.props.user.filter(user => user.id == this.props.match.params.id)[0]
-        // userName: userZ
+        name: this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0].name,
+        email: this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0].email
     }
 
     // handleClickTest = (e) => {
@@ -21,9 +19,6 @@ class EditUser extends React.Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        // console.log(this.props.history)
-        // console.log(this.props.match.params.id)
-        // console.log(this.state)
         this.props.history.push('/')
     }
 
@@ -36,10 +31,12 @@ class EditUser extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log('submitted edit')
-        const userData = this.props.user.filter(user => user.id == this.props.match.params.id)[0]
+
+        // Original user data updated with data from form (component state)
+        const userData = this.props.user.filter(user => user.id === parseInt(this.props.match.params.id))[0]
         userData.name = this.state.name
         userData.email = this.state.email
-        // console.log(userData)
+        
         this.props.editUserOnServer(userData)
         this.props.history.push('/')
     }
@@ -78,11 +75,6 @@ class EditUser extends React.Component {
                                     onClick={this.handleClick}
                                 >Cancel
                                 </button>
-                                {/* <button
-                                    className="btn grey lighten-1"
-                                    onClick={this.handleClickTest}
-                                >refresh test
-                                </button> */}
                             </div>
                         </div>
                     </div>
@@ -94,14 +86,12 @@ class EditUser extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // user: state.users.users.filter(user => user.id === this.props.match.params.id)
         user: state.users.users
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUserToServer: (user) => dispatch(addUserToServer(user)),
         editUserOnServer: (user) => dispatch(editUserOnServer(user))
     }
 }

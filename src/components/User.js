@@ -4,6 +4,7 @@ const User = (props) => {
 
     const { id, name, username, email, address: { city } = {}} = props.user || {}
     const editUser = props.editUser
+    const deleteUser = props.deleteUser
 
     return (
         <tr>
@@ -16,7 +17,7 @@ const User = (props) => {
                 <button className="btn amber" onClick={editUser} id={id}>Edit</button>
             </td>
             <td>
-                <button className="btn red">Delete</button>
+                <button className="btn red" onClick={deleteUser} id={id}>Delete</button>
             </td>
         </tr>
     )
